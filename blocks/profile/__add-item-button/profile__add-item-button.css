@@ -1,0 +1,12 @@
+.profile__add-item-button {
+  width: 150px;
+  height: 50px;
+  outline: 2px solid white;
+  border-radius: 2px;
+  background-image: url(../../../images/add-item.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 35px 0;
+  grid-area: add-button;
+  justify-self: end;
+}
