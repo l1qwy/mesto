@@ -2,4 +2,5 @@
   display: grid;
   grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
   grid-template-areas: "image description edit-button add-button";
+  margin-bottom: 51px;
 }
