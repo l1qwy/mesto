@@ -16,14 +16,36 @@
   opacity: 0.6;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1024px) {
   .popup__close {
     top: 155px;
-    right: 197px;
+    right: 255px;
   }
 }
 
+
 @media (max-width: 768px) {
+  .popup__close {
+    top: 87px;
+    right: 200px;
+  }
+}
+
+@media (max-width: 425px) {
+  .popup__close {
+    top: 87px;
+    right: 37px;
+  }
+}
+
+@media (max-width: 375px) {
+  .popup__close {
+    top: 87px;
+    right: 19px;
+  }
+}
+
+@media (max-width: 320px) {
   .popup__close {
     top: 87px;
     right: 19px;
