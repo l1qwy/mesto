@@ -4,5 +4,15 @@
   border-radius: 10px;
   background-color: white;
   margin: 195px auto;
-  position: relative;
+  padding: 34px 36px 37px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .popup__container {
+    height: 322px;
+    width: 282px;
+    padding: 25px 22px;
+    margin: 123px auto;
+  }
 }

@@ -14,68 +14,70 @@
     <section class="profile">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Здесь должно быть изображение Вашего профиля">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit-button">
+        </button></h1>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <div class="profile__edit-button">
-      </div>
-      <div class="profile__add-item-button">
-      </div>
+      <button class="profile__add-item-button">
+      </button>
     </section>
     <section class="galery">
       <div class="galery__item">
         <img class="galery__img" src="./images/gonoda, Russia.jpg">
         <div class="galery__item-description">
           <p class="galery__item-title">Россия</p>
-          <img class="galery__item-emotion" src="./images/like.png" alt="Здесь должен быть значек нравится">
+          <button class="galery__item-emotion">
         </div>
       </div>
       <div class="galery__item">
         <img class="galery__img" src="./images/islandia.jpg">
         <div class="galery__item-description">
           <p class="galery__item-title">Исландия</p>
-          <img class="galery__item-emotion" src="./images/like.png" alt="Здесь должен быть значек нравится">
+          <button class="galery__item-emotion">
         </div>
       </div>
       <div class="galery__item">
         <img class="galery__img" src="./images/italia.jpg">
         <div class="galery__item-description">
           <p class="galery__item-title">Италия</p>
-          <img class="galery__item-emotion" src="./images/like.png" alt="Здесь должен быть значек нравится">
+          <button class="galery__item-emotion">
         </div>
       </div>
       <div class="galery__item">
         <img class="galery__img" src="./images/plevetsie-ozera.jpg">
         <div class="galery__item-description">
           <p class="galery__item-title">Хорватия</p>
-          <img class="galery__item-emotion" src="./images/like.png" alt="Здесь должен быть значек нравится">
+          <button class="galery__item-emotion">
         </div>
       </div>
       <div class="galery__item">
         <img class="galery__img" src="./images/sidney.jpg">
         <div class="galery__item-description">
           <p class="galery__item-title">Австралия</p>
-          <img class="galery__item-emotion" src="./images/like.png" alt="Здесь должен быть значек нравится">
+          <button class="galery__item-emotion">
         </div>
       </div>
       <div class="galery__item">
         <img class="galery__img" src="./images/veneza.jpg">
         <div class="galery__item-description">
           <p class="galery__item-title">Венеция</p>
-          <img class="galery__item-emotion" src="./images/like.png" alt="Здесь должен быть значек нравится">
+          <button class="galery__item-emotion">
         </div>
       </div>
     </section>
   </main>
   <footer class="footer">
-    <p class="footer__copyring">&copy; 2020 Mesto Russia</p>
+    <p class="footer__copyring">&copy; 2020 Коровин Иван</p>
   </footer>
   <section class="popup">
     <div class="popup__container">
-      <img class="popup__close" src="./images/close-edit-profile.png" alt="Здесь должна быть кнопка закрытия окна редактирования проофиля">
-      <div class="popup__content">
-        <h2 class="popup__title">Редактировать профиль</h2>
-      </div>
+      <button class="popup__close" type="button"></button>
+      <form class="form">
+        <h2 class="form__title">Редактировать профиль</h2>
+          <p class="form__field-text"><input class="form__field" id="name" type="text" value="Жак-Ив Кусто" name="name" placeholder="Имя"></p>
+          <p class="form__field-text"><input class="form__field" id="job" type="text" value="Исследователь океана" name="job" placeholder="Деятельность"></p>
+          <button class="submit" type="submit"><p class="submit__text">Сохранить</p></button>
+      </form>
     </div>
   </section>
   <script src="./scripts/index.js"></script>

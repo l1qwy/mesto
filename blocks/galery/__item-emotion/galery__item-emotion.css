@@ -1,4 +1,14 @@
 .galery__item-emotion {
+  background-image: url(../../../images/like.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border-style: none;
   width: 22px;
   height: 19px;
+  padding: 0;
+}
+
+.galery__item-emotion:hover {
+  opacity: 0.5;
 }

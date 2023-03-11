@@ -4,3 +4,14 @@
   grid-template-areas: "image description edit-button add-button";
   margin-bottom: 51px;
 }
+
+@media (max-width: 768px) {
+  .profile{
+  grid-template-columns: 1fr;
+  grid-template-areas:
+      "image"
+      "description"
+      "add-button";
+      margin-bottom: 36px;
+  }
+}

@@ -5,3 +5,9 @@
   margin: 0;
   grid-area: image;
 }
+
+@media (max-width: 768px) {
+  .profile__avatar {
+    margin: 0 auto;
+  }
+}

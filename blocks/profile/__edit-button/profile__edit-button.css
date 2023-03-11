@@ -2,9 +2,22 @@
   background-image: url(../../../images/profile-edit.png);
   width: 24px;
   height: 24px;
-  outline: 1px solid white;
+  border: 1px solid white;
   background-repeat: no-repeat;
   background-position: center;
-  grid-area: edit-button;
-  margin: 37px 18px 0;
+  background-color: transparent;
+  margin: 0px 18px 0;
+  padding: 0;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+    margin: 0 10px 0;
+  }
 }
