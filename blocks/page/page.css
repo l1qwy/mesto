@@ -8,7 +8,7 @@
   padding-left: calc( (100vw - 320px)/(1280 - 320) * (200 - 19) + 19px);
 }
 
-@media (max-width: 320px) {
+@media (max-width: 768px) {
   .page {
     padding-top: 28px;
     padding-bottom: 36px;

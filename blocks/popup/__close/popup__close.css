@@ -9,8 +9,23 @@
   top: 155px;
   right: 385px;
   padding: 0;
+  cursor: pointer;
 }
 
 .popup__close:hover {
   opacity: 0.6;
+}
+
+@media (max-width: 1279px) {
+  .popup__close {
+    top: 155px;
+    right: 197px;
+  }
+}
+
+@media (max-width: 768px) {
+  .popup__close {
+    top: 87px;
+    right: 19px;
+  }
 }

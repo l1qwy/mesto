@@ -11,6 +11,7 @@
   grid-area: add-button;
   justify-self: end;
   padding: 0;
+  cursor: pointer;
 }
 
 .profile__add-item-button:hover {
