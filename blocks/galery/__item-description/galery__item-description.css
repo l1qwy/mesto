@@ -1,6 +1,6 @@
 .galery__item-description {
   display: flex;
   max-width: 246px;
-  margin: 25px auto 31px;
+  margin: 24px auto 26px;
   justify-content: space-between;
 }

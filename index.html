@@ -14,69 +14,68 @@
     <section class="profile">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Здесь должно быть изображение Вашего профиля">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit-button">
-        </button></h1>
-        <p class="profile__description">Исследователь океана</p>
+        <h1 class="profile__name" id="name">Жак-Ив Кусто</h1>
+        <p class="profile__description" id="job">Исследователь океана</p>
       </div>
-      <button class="profile__add-item-button">
-      </button>
+      <button class="profile__edit-button" type="button" aria-label="edit-profile-button"></button>
+      <button class="profile__add-item-button" type="button" aria-label="add-item-galery"></button>
     </section>
     <section class="galery">
-      <div class="galery__item">
-        <img class="galery__img" src="./images/gonoda, Russia.jpg">
+      <article class="galery__item">
+        <img class="galery__img" src="./images/gonoda_Russia.jpg" alt="Здесь должно быть изображение озера ссела Гонода, Россия">
         <div class="galery__item-description">
-          <p class="galery__item-title">Россия</p>
-          <button class="galery__item-emotion"></button>
+          <h2 class="galery__item-title">Россия</h2>
+          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
         </div>
-      </div>
-      <div class="galery__item">
-        <img class="galery__img" src="./images/islandia.jpg">
+      </article>
+      <article class="galery__item">
+        <img class="galery__img" src="./images/islandia.jpg" alt="Здесь должно быть изображение пещер Исландии">
         <div class="galery__item-description">
-          <p class="galery__item-title">Исландия</p>
-          <button class="galery__item-emotion"></button>
+          <h2 class="galery__item-title">Исландия</h2>
+          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
         </div>
-      </div>
-      <div class="galery__item">
-        <img class="galery__img" src="./images/italia.jpg">
+      </article>
+      <article class="galery__item">
+        <img class="galery__img" src="./images/italia.jpg" alt="Здесь должно быть изображение замка в Италии">
         <div class="galery__item-description">
-          <p class="galery__item-title">Италия</p>
-          <button class="galery__item-emotion"></button>
+          <h2 class="galery__item-title">Италия</h2>
+          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
         </div>
-      </div>
-      <div class="galery__item">
-        <img class="galery__img" src="./images/plevetsie-ozera.jpg">
+      </article>
+      <article class="galery__item">
+        <img class="galery__img" src="./images/plevetsie-ozera.jpg" alt="Здесь должно быть изображение плеветских озер Хорватии">
         <div class="galery__item-description">
-          <p class="galery__item-title">Хорватия</p>
-          <button class="galery__item-emotion"></button>
+          <h2 class="galery__item-title">Хорватия</h2>
+          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
         </div>
-      </div>
-      <div class="galery__item">
-        <img class="galery__img" src="./images/sidney.jpg">
+      </article>
+      <article class="galery__item">
+        <img class="galery__img" src="./images/sidney.jpg" alt="Здесь должно быть изображение Сиднейоской оперы в Австралии">
         <div class="galery__item-description">
-          <p class="galery__item-title">Австралия</p>
-          <button class="galery__item-emotion"></button>
+          <h2 class="galery__item-title">Австралия</h2>
+          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
         </div>
-      </div>
-      <div class="galery__item">
-        <img class="galery__img" src="./images/veneza.jpg">
+      </article>
+      <article class="galery__item">
+        <img class="galery__img" src="./images/veneza.jpg" alt="здесь должно быть изображение собора в Венеции">
         <div class="galery__item-description">
-          <p class="galery__item-title">Венеция</p>
-          <button class="galery__item-emotion"></button>
+          <h2 class="galery__item-title">Венеция</h2>
+          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
         </div>
-      </div>
+      </article>
     </section>
   </main>
   <footer class="footer">
-    <p class="footer__copyring">&copy; 2020 Коровин Иван</p>
+    <p class="footer__copyring">&copy; 2023 Коровин Иван</p>
   </footer>
   <section class="popup">
     <div class="popup__container">
-      <button class="popup__close" type="button"></button>
-      <form class="form">
-        <h2 class="form__title">Редактировать профиль</h2>
-          <p class="form__field-text"><input class="form__field" id="name" type="text" value="Жак-Ив Кусто" name="name" placeholder="Имя"></p>
-          <p class="form__field-text"><input class="form__field" id="job" type="text" value="Исследователь океана" name="job" placeholder="Деятельность"></p>
-          <button class="submit" type="submit"><p class="submit__text">Сохранить</p></button>
+      <button class="popup__close" type="button" aria-label="close-popup"></button>
+      <form class="form" name="form">
+        <h3 class="form__title">Редактировать профиль</h3>
+          <input class="form__field form__field_name" type="text" placeholder="Имя" required>
+          <input class="form__field form__field_job" type="text" placeholder="Деятельность" required>
+          <button class="submit" type="submit" aria-label="save-form">Сохранить</button>
       </form>
     </div>
   </section>
