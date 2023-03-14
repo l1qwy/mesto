@@ -7,8 +7,8 @@ const popupCloseButtonElement = popupElement.querySelector('.popup__close');
 //добавляем фунцию для отображения модального окна
 //находим форму и поля в модалке
 let formElement = popupElement.querySelector('.form');
-let fieldName = formElement.querySelector('.form__field_name');
-let fieldJob = formElement.querySelector('.form__field_job');
+let fieldName = formElement.querySelector('.form__field_input_name');
+let fieldJob = formElement.querySelector('.form__field_input_job');
 
 //находми элементы профиля
 let nameDefault = document.getElementById('name');
@@ -43,13 +43,9 @@ function handleFormSubmit(event) {
     let nameValue = fieldName.value;
     let jobValue = fieldJob.value;
 
-    // Выберите элементы, куда должны быть вставлены значения полей
-    let nameOutput = document.querySelector('.profile__name');
-    let jobOutput = document.querySelector('.profile__description');
-
     // Вставьте новые значения с помощью textContent
-    nameOutput.textContent = nameValue;
-    jobOutput.textContent = jobValue;
+    nameDefault.textContent = nameValue;
+    jobDefault.textContent = jobValue;
 
     closePopup();
 };
