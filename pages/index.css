@@ -17,9 +17,11 @@
 @import url(../blocks/galery/__item-emotion/galery__item-emotion.css);
 @import url(../blocks/galery/__item-emotion/_active/galery__item-emotion_active.css);
 @import url(../blocks/galery/__item-title/galery__item-title.css);
+@import url(../blocks/galery/__delete/galery__delete.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyring/footer__copyring.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_add-item/popup-add-item.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/_open.css/popup_open.css);

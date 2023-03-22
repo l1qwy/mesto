@@ -21,48 +21,6 @@
       <button class="profile__add-item-button" type="button" aria-label="add-item-galery"></button>
     </section>
     <section class="galery">
-      <article class="galery__item">
-        <img class="galery__img" src="./images/gonoda_Russia.jpg" alt="Здесь должно быть изображение озера ссела Гонода, Россия">
-        <div class="galery__item-description">
-          <h2 class="galery__item-title">Россия</h2>
-          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        </div>
-      </article>
-      <article class="galery__item">
-        <img class="galery__img" src="./images/islandia.jpg" alt="Здесь должно быть изображение пещер Исландии">
-        <div class="galery__item-description">
-          <h2 class="galery__item-title">Исландия</h2>
-          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        </div>
-      </article>
-      <article class="galery__item">
-        <img class="galery__img" src="./images/italia.jpg" alt="Здесь должно быть изображение замка в Италии">
-        <div class="galery__item-description">
-          <h2 class="galery__item-title">Италия</h2>
-          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        </div>
-      </article>
-      <article class="galery__item">
-        <img class="galery__img" src="./images/plevetsie-ozera.jpg" alt="Здесь должно быть изображение плеветских озер Хорватии">
-        <div class="galery__item-description">
-          <h2 class="galery__item-title">Хорватия</h2>
-          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        </div>
-      </article>
-      <article class="galery__item">
-        <img class="galery__img" src="./images/sidney.jpg" alt="Здесь должно быть изображение Сиднейоской оперы в Австралии">
-        <div class="galery__item-description">
-          <h2 class="galery__item-title">Австралия</h2>
-          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        </div>
-      </article>
-      <article class="galery__item">
-        <img class="galery__img" src="./images/veneza.jpg" alt="здесь должно быть изображение собора в Венеции">
-        <div class="galery__item-description">
-          <h2 class="galery__item-title">Венеция</h2>
-          <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        </div>
-      </article>
     </section>
   </main>
   <footer class="footer">
@@ -79,6 +37,27 @@
       </form>
     </div>
   </section>
+  <section class="popup popup_add-item">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="close-popup"></button>
+      <form class="form form-add-item-galery" name="form-add-item-galery">
+        <h3 class="form__title">Новое место</h3>
+          <input class="form__field form__field_input_name form__field_input_title" type="text" name="input-name-img" placeholder="Название" required>
+          <input class="form__field form__field_input_job form__field_input_url" type="text" name="input-url" placeholder="Ссылка на картинку" required>
+          <button class="submit submit_create" type="submit" aria-label="add-item-galery">Создать</button>
+      </form>
+    </div>
+  </section>
+  <template id="galery-item">
+    <article class="galery__item">
+      <img class="galery__img" alt="">
+      <div class="galery__item-description">
+        <h2 class="galery__item-title"></h2>
+        <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
+        <button class="galery__delete" type="button" aria-label="delete-galery-item"></button>
+      </div>
+    </article>
+  </template> 
   <script src="./scripts/index.js"></script>
 </body>
 </html>
