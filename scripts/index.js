@@ -25,9 +25,12 @@ const openPopupAddItem = function () {
   popupAddElement.classList.add('popup_open');
 };
 
-const openPopupScaleImg = function () {
+const openPopupScaleImg = function (element) {
+
+  popupScaleImg.querySelector('.popup__scale-img').src = element.link;
+  popupScaleImg.querySelector('.popup__title-img').textContent = element.name;
+
   popupScaleImg.classList.add('popup_open');
-  popupScaleImg.prepend(popupOpenScaleImg)
 };
 
 
@@ -80,7 +83,7 @@ function handleFormSubmit(event) {
 const initialCards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
   },
   {
     name: 'Челябинская область',
@@ -109,42 +112,47 @@ const galeryItems = document.querySelector('.galery');
 const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
 const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
 
+//создаем конткнт с данными из массива
+function createGaleryItem(element) {
+  const galeryElement = galeryTemplate.cloneNode(true);
+  //берем данные из массива
+  galeryElement.querySelector('.galery__img').src = element.link;
+  galeryElement.querySelector('.galery__item-title').textContent = element.name;
+  // слушатели удаления и лайка
+  galeryElement.querySelector('.galery__delete').addEventListener('click', handleDeleteGaleryItem);
+  galeryElement.querySelector('.galery__item-emotion').addEventListener('click', handleEmotionGaleryItem);
+  // слушатель открытия изображения
+  galeryElement.querySelector('.galery__img').addEventListener("click", () => openPopupScaleImg(element));
+  return galeryElement;
+}
+
+//дабавляем карточки из массива на страницу
 initialCards.forEach(element => {
   const renderGaleryItem = createGaleryItem(element);
   galeryItems.append(renderGaleryItem);
 });
 
-function createGaleryItem(element) {
-  const galeryElement = galeryTemplate.cloneNode(true);
-
-  galeryElement.querySelector('.galery__img').src = element.link;
-  galeryElement.querySelector('.galery__item-title').textContent = element.name;
-  
-  galeryElement.querySelector('.galery__delete').addEventListener('click', handleDeleteGaleryItem);
-  galeryElement.querySelector('.galery__item-emotion').addEventListener('click', handleEmotionGaleryItem);
-  
-  galeryElement.querySelector('.galery__img').addEventListener("click", openPopupScaleImg);
-  return galeryElement;
-}
-
+//добавление карточки на страницу через кнопку добавить
 function addGaleryItem (event) {
   event.preventDefault();
-  
+  //берем значиения инпутов из модалки добавления элемента в галерею
   const addItem = createGaleryItem({
     name: galeryItemTitle.value,
-    link: galeryItemLink.value
+    link: galeryItemLink.value,
+    alt: galeryItemTitle.value
   });
   galeryItems.prepend(addItem);
   event.target.reset();
   closePopup();
 };
 
-
+//фунция удаления элемента галерии
 function handleDeleteGaleryItem (event) {
   const deleteGaleryItem = event.target.closest('.galery__item');
   deleteGaleryItem.remove();
 };
 
+//фунция лайка
 function handleEmotionGaleryItem (event) {
   event.target.classList.toggle('galery__item-emotion_active');
 };
@@ -155,13 +163,14 @@ formElement.addEventListener('submit', handleFormSubmit);
 popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', addGaleryItem);
 
 //обработчики кликов
+//клики модалки редактирования профиля
 popupOpenButtonElement.addEventListener("click", openPopup);
 popupCloseButtonElement.addEventListener("click", closePopup);
 popupElement.addEventListener('click', closePopupByClickOnOverlay);
-
+//клики модалки добавления элемента в галерею
 popupOpenButtonAddElement.addEventListener("click", openPopupAddItem);
 popupCloseButtonAddElement.addEventListener("click", closePopup);
 popupAddElement.addEventListener('click', closePopupByClickOnOverlay);
-
+//клики модалки увеличенного изображения элемента галерии
 popupCloseScaleImg.addEventListener("click", closePopup);
 popupScaleImg.addEventListener('click', closePopupByClickOnOverlay);
