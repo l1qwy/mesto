@@ -8,6 +8,10 @@ const popupAddElement = document.querySelector('.popup_add-item');
 const popupOpenButtonAddElement = document.querySelector('.profile__add-item-button');
 const popupCloseButtonAddElement = popupAddElement.querySelector('.popup__close');
 
+//Открытие модального окна увеличенного изображения
+const popupScaleImg = document.querySelector('.popup_scale-img');
+const popupOpenScaleImg = document.querySelector('.galery__img');
+const popupCloseScaleImg = popupScaleImg.querySelector('.popup__close');
 
 //открытие с подстановкой из полей профиля
 const openPopup = function () {
@@ -18,14 +22,24 @@ const openPopup = function () {
 };
 
 const openPopupAddItem = function () {
-  popupAddElement.classList.add("popup_open");
+  popupAddElement.classList.add('popup_open');
 };
+
+const openPopupScaleImg = function () {
+  popupScaleImg.classList.add('popup_open');
+  popupScaleImg.prepend(popupOpenScaleImg)
+};
+
+
 
 //фунция закрытия по клику на close
 const closePopup = function () {
-  popupAddElement.classList.remove("popup_open");
-  popupElement.classList.remove("popup_open");
+  popupScaleImg.classList.remove('popup_open');
+  popupAddElement.classList.remove('popup_open');
+  popupElement.classList.remove('popup_open');
+  
 };
+
 
 
 // фунция закрытия по клику за пределами модалки
@@ -61,11 +75,6 @@ function handleFormSubmit(event) {
     closePopup();
 };
 
-// реализация сердечка
-//const itemEmotion = document.querySelectorAll('.galery__item-emotion');
-//let like = document.querySelector('.galery__item-emotion');
-//like.addEventListener('click', () => 
-//like.classList.toggle('galery__item-emotion_active'));
 
 //массив элементов
 const initialCards = [
@@ -97,50 +106,53 @@ const initialCards = [
 
 const galeryTemplate = document.querySelector('#galery-item').content;
 const galeryItems = document.querySelector('.galery');
-
-
-function createGaleryItem(data) {
-  const galeryElement = galeryTemplate.cloneNode(true);
-
-  galeryElement.querySelector('.galery__img').src = data.link;
-  galeryElement.querySelector('.galery__item-title').textContent = data.name;
-
-  return galeryElement;
-}
+const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
+const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
 
 initialCards.forEach(element => {
   const renderGaleryItem = createGaleryItem(element);
   galeryItems.append(renderGaleryItem);
 });
 
+function createGaleryItem(element) {
+  const galeryElement = galeryTemplate.cloneNode(true);
+
+  galeryElement.querySelector('.galery__img').src = element.link;
+  galeryElement.querySelector('.galery__item-title').textContent = element.name;
+  
+  galeryElement.querySelector('.galery__delete').addEventListener('click', handleDeleteGaleryItem);
+  galeryElement.querySelector('.galery__item-emotion').addEventListener('click', handleEmotionGaleryItem);
+  
+  galeryElement.querySelector('.galery__img').addEventListener("click", openPopupScaleImg);
+  return galeryElement;
+}
+
 function addGaleryItem (event) {
-  console.log(event);
   event.preventDefault();
   
-    const addItem = createGaleryItem({
-      name: popupAddElement.querySelector('.form__field_input_title').value,
-      link: popupAddElement.querySelector('.form__field_input_url').value
-    });
-
+  const addItem = createGaleryItem({
+    name: galeryItemTitle.value,
+    link: galeryItemLink.value
+  });
   galeryItems.prepend(addItem);
-  
   event.target.reset();
-
   closePopup();
 };
-popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', addGaleryItem);
 
 
-//function setEventListeners () {
-  //popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', handleAddGaleryItem);
-  //galeryItems.querySelector('.galery__delete').addEventListener('click', hadleDeleteItem);
-  //popupAddElement.querySelector('.submit').addEventListener('click', handleAddItem);
-  //galeryElement.querySelector('.galery__item-emotion').addEventListener('.click', handleLikeItem);
-//};
+function handleDeleteGaleryItem (event) {
+  const deleteGaleryItem = event.target.closest('.galery__item');
+  deleteGaleryItem.remove();
+};
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+function handleEmotionGaleryItem (event) {
+  event.target.classList.toggle('galery__item-emotion_active');
+};
+
+// Прикрепляем обработчики к форме:
+// они будут следить за сытием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
+popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', addGaleryItem);
 
 //обработчики кликов
 popupOpenButtonElement.addEventListener("click", openPopup);
@@ -150,3 +162,6 @@ popupElement.addEventListener('click', closePopupByClickOnOverlay);
 popupOpenButtonAddElement.addEventListener("click", openPopupAddItem);
 popupCloseButtonAddElement.addEventListener("click", closePopup);
 popupAddElement.addEventListener('click', closePopupByClickOnOverlay);
+
+popupCloseScaleImg.addEventListener("click", closePopup);
+popupScaleImg.addEventListener('click', closePopupByClickOnOverlay);

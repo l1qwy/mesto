@@ -48,13 +48,20 @@
       </form>
     </div>
   </section>
+  <section class="popup popup_scale-img">
+      <button class="popup__close" type="button" aria-label="close-popup"></button>
+      <figure>
+        <img class="popup__scale-img" scr="" alt="">
+        <figcaption></figcaption>
+      </figure>
+  </section>
   <template id="galery-item">
     <article class="galery__item">
       <img class="galery__img" alt="">
+      <button class="galery__delete" type="button" aria-label="delete-galery-item"></button>
       <div class="galery__item-description">
         <h2 class="galery__item-title"></h2>
         <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
-        <button class="galery__delete" type="button" aria-label="delete-galery-item"></button>
       </div>
     </article>
   </template> 
