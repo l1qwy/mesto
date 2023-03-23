@@ -8,9 +8,9 @@
   height: 19px;
   padding: 0;
   cursor: pointer;
-  position: relative;
-  top: -267px;
-  right: -244px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 .galery__delete:hover {
