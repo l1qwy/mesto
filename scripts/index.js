@@ -1,19 +1,36 @@
-//Открытие, зыкрытие модального окна редактирования
+//модальные окна
 const popupElement = document.querySelector('.popup');
-const popupOpenButtonElement = document.querySelector('.profile__edit-button');
-const popupCloseButtonElement = popupElement.querySelector('.popup__close');
-
-//Открытие, зыкрытие модального окна добавления в галерею
 const popupAddElement = document.querySelector('.popup_add-item');
-const popupOpenButtonAddElement = document.querySelector('.profile__add-item-button');
-const popupCloseButtonAddElement = popupAddElement.querySelector('.popup__close');
-
-//Открытие модального окна увеличенного изображения
 const popupScaleImg = document.querySelector('.popup_scale-img');
+
+//кнопки отккрытия модалок
+const popupOpenButtonElement = document.querySelector('.profile__edit-button');
+const popupOpenButtonAddElement = document.querySelector('.profile__add-item-button');
 const popupOpenScaleImg = document.querySelector('.galery__img');
+
+//кнопки закрытия модалок
+const popupCloseButtonElement = popupElement.querySelector('.popup__close');
+const popupCloseButtonAddElement = popupAddElement.querySelector('.popup__close');
 const popupCloseScaleImg = popupScaleImg.querySelector('.popup__close');
 
-//открытие с подстановкой из полей профиля
+//поля формы в модалке редактирования профиля
+const formElement = popupElement.querySelector('.form');
+const fieldName = formElement.querySelector('.form__field_input_name');
+const fieldJob = formElement.querySelector('.form__field_input_job');
+
+//элементы профиля на странице
+const nameDefault = document.getElementById('name');
+const jobDefault = document.getElementById('job');
+
+//темплейт контент
+const galeryTemplate = document.querySelector('#galery-item').content;
+const galeryItems = document.querySelector('.galery');
+
+//поля формы модалки добавления нового элемента в галерею
+const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
+const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
+
+//функция открытия модалки с подстановкой из полей профиля
 const openPopup = function () {
   popupElement.classList.add("popup_open");
   //записываем в поля формы данные значения свойства порфиля
@@ -21,10 +38,12 @@ const openPopup = function () {
   fieldJob.value = jobDefault.textContent;
 };
 
+//функция открытия модалки добавления элементов в галерею
 const openPopupAddItem = function () {
   popupAddElement.classList.add('popup_open');
 };
 
+//функция открытия увеличенного изображения элемента
 const openPopupScaleImg = function (element) {
 
   popupScaleImg.querySelector('.popup__scale-img').src = element.link;
@@ -32,8 +51,6 @@ const openPopupScaleImg = function (element) {
 
   popupScaleImg.classList.add('popup_open');
 };
-
-
 
 //фунция закрытия по клику на close
 const closePopup = function () {
@@ -43,8 +60,6 @@ const closePopup = function () {
   
 };
 
-
-
 // фунция закрытия по клику за пределами модалки
 const closePopupByClickOnOverlay = function(event) {
   if (event.target !== event.currentTarget) {
@@ -53,17 +68,7 @@ const closePopupByClickOnOverlay = function(event) {
   closePopup();
 };
 
-//находим форму и поля в модалке
-let formElement = popupElement.querySelector('.form');
-let fieldName = formElement.querySelector('.form__field_input_name');
-let fieldJob = formElement.querySelector('.form__field_input_job');
-
-//находми элементы профиля
-let nameDefault = document.getElementById('name');
-let jobDefault = document.getElementById('job');
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+// Обработчик «отправки» формы
 function handleFormSubmit(event) {
     event.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
@@ -83,7 +88,7 @@ function handleFormSubmit(event) {
 const initialCards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
@@ -107,17 +112,14 @@ const initialCards = [
   }
 ]; 
 
-const galeryTemplate = document.querySelector('#galery-item').content;
-const galeryItems = document.querySelector('.galery');
-const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
-const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
-
 //создаем конткнт с данными из массива
 function createGaleryItem(element) {
   const galeryElement = galeryTemplate.cloneNode(true);
   //берем данные из массива
   galeryElement.querySelector('.galery__img').src = element.link;
   galeryElement.querySelector('.galery__item-title').textContent = element.name;
+  galeryElement.querySelector('.galery__img').alt = 'Изображение: ' + element.name;
+  
   // слушатели удаления и лайка
   galeryElement.querySelector('.galery__delete').addEventListener('click', handleDeleteGaleryItem);
   galeryElement.querySelector('.galery__item-emotion').addEventListener('click', handleEmotionGaleryItem);
@@ -157,8 +159,7 @@ function handleEmotionGaleryItem (event) {
   event.target.classList.toggle('galery__item-emotion_active');
 };
 
-// Прикрепляем обработчики к форме:
-// они будут следить за сытием “submit” - «отправка»
+// Прикрепляем обработчики к форме они будут следить за сытием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
 popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', addGaleryItem);
 
