@@ -29,6 +29,7 @@ const galeryItems = document.querySelector('.galery');
 //поля формы модалки добавления нового элемента в галерею
 const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
 const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
+const formAddItemGalary = document.querySelector('.form-add-item-galery');
 
 //функция открытия модалок
 const openPopup = function (popup) {
@@ -50,8 +51,6 @@ const openPopupScaleImg = function (element) {
 
   popupScaleImg.classList.add('popup_open');
 };
-
-const formAddItemGalary = document.querySelector('.form-add-item-galery');
 
 //фунция закрытия по клику на close и вне модалки
 const closePopup = function (popup) {
@@ -85,35 +84,7 @@ function handleFormSubmit(event) {
     closePopup(popupEditProfile);
   };
 
-//массив элементов
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
-//создаем конткнт с данными из массива
+//создаем контент с данными из массива
 function createGaleryItem(element) {
   const galeryElement = galeryTemplate.cloneNode(true);
   //берем данные из массива
@@ -164,11 +135,11 @@ function handleEmotionGaleryItem (event) {
   event.target.classList.toggle('galery__item-emotion_active');
 };
 
-// Прикрепляем обработчики к форме они будут следить за сытием “submit” - «отправка»
+//обработчики кликов
+//обработчики отправки формы(по клику на submit)
 formElement.addEventListener('submit', handleFormSubmit);
 popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', addGaleryItem);
 
-//обработчики кликов
 //клики модалки редактирования профиля
 popupOpenButtonEditProfile.addEventListener("click", function () {
   openPopup(popupEditProfile);
