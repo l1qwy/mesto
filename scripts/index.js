@@ -14,9 +14,11 @@ const popupCloseButtonAddElement = popupAddElement.querySelector('.popup__close'
 const popupCloseScaleImg = popupScaleImg.querySelector('.popup__close');
 
 //поля формы в модалке редактирования профиля
-const formElement = popupEditProfile.querySelector('.form');
-const fieldName = formElement.querySelector('.form__field_input_name');
-const fieldJob = formElement.querySelector('.form__field_input_job');
+const formEditProfile = popupEditProfile.querySelector('.form');
+const fieldName = formEditProfile.querySelector('.form__field_input_name');
+const fieldJob = formEditProfile.querySelector('.form__field_input_job');
+
+
 
 //элементы профиля на странице
 const nameDefault = document.getElementById('name');
@@ -29,12 +31,10 @@ const galeryItems = document.querySelector('.galery');
 //поля формы модалки добавления нового элемента в галерею
 const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
 const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
-const formAddItemGalary = document.querySelector('.form-add-item-galery');
+const formAddItemGalary = popupAddElement.querySelector('.form-add-item-galery');
 
 //функция открытия модалок
 const openPopup = function (popup) {
-  fieldName.value = nameDefault.textContent;
-  fieldJob.value = jobDefault.textContent;
   popup.classList.add('popup_open');
 };
 
@@ -55,7 +55,6 @@ const openPopupScaleImg = function (element) {
 //фунция закрытия по клику на close и вне модалки
 const closePopup = function (popup) {
   popup.classList.remove('popup_open');
-  formAddItemGalary.reset();
 };
 
 //находим модалки и навешиваем функцию закрытия при клике вне
@@ -70,17 +69,15 @@ popupList.forEach(popup => {
 })
 
 // Обработчик «отправки» формы
-function handleFormSubmit(event) {
+function submitFormEditProfile(event) {
     event.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-
     // Получите значение полей jobInput и nameInput из свойства value
     const nameValue = fieldName.value;
     const jobValue = fieldJob.value;
-
     // Вставьте новые значения с помощью textContent
     nameDefault.textContent = nameValue;
     jobDefault.textContent = jobValue;
-  
+    
     closePopup(popupEditProfile);
   };
 
@@ -137,11 +134,14 @@ function handleEmotionGaleryItem (event) {
 
 //обработчики кликов
 //обработчики отправки формы(по клику на submit)
-formElement.addEventListener('submit', handleFormSubmit);
-popupAddElement.querySelector('.form-add-item-galery').addEventListener('submit', addGaleryItem);
+formEditProfile.addEventListener('submit', submitFormEditProfile);
+formAddItemGalary.addEventListener('submit', addGaleryItem);
 
 //клики модалки редактирования профиля
 popupOpenButtonEditProfile.addEventListener("click", function () {
+//записываем значения полей на страницы в поля формы    
+  fieldName.value = nameDefault.textContent;
+  fieldJob.value = jobDefault.textContent;
   openPopup(popupEditProfile);
 });
 popupCloseButtonElement.addEventListener("click", function () {
@@ -150,6 +150,8 @@ popupCloseButtonElement.addEventListener("click", function () {
 
 //клики модалки добавления элемента в галерею
 popupOpenButtonAddElement.addEventListener("click", function () {
+//очищаем поля формы
+  formAddItemGalary.reset();
   openPopup(popupAddElement);
 });
 popupCloseButtonAddElement.addEventListener("click", function () {
