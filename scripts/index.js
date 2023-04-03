@@ -18,8 +18,6 @@ const formEditProfile = popupEditProfile.querySelector('.form');
 const fieldName = formEditProfile.querySelector('.form__field_input_name');
 const fieldJob = formEditProfile.querySelector('.form__field_input_job');
 
-
-
 //элементы профиля на странице
 const nameDefault = document.getElementById('name');
 const jobDefault = document.getElementById('job');
@@ -77,7 +75,6 @@ function submitFormEditProfile(event) {
     // Вставьте новые значения с помощью textContent
     nameDefault.textContent = nameValue;
     jobDefault.textContent = jobValue;
-    
     closePopup(popupEditProfile);
   };
 
