@@ -33,6 +33,6 @@
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__error/form__error.css);
 @import url(../blocks/form/__field/_error/form__field_error.css);
-@import url(../blocks/form/__field/_error-container/form__field_error-containercontainer.css);
+@import url(../blocks/form/__error-container/form__error-container.css);
 @import url(../blocks/submit/submit.css);
 @import url(../blocks/submit/_disabled/submit_disabled.css);
