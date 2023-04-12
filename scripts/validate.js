@@ -1,9 +1,6 @@
 const enableValidation = ({ formSelector, ...rest }) => {
   const forms = Array.from(document.querySelectorAll(formSelector));
   forms.forEach(form => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-    })
     setEventListeners(form, rest)
   })
 };
@@ -37,13 +34,11 @@ const hasInvalidInput = (formInputs) => {
 };
 
 const enableButton = (button, { inactiveButtonClass }) => {
-  button.classList.add(inactiveButtonClass);
   button.classList.remove(inactiveButtonClass);
   button.removeAttribute('disabled');
 };
 
 const disableButton = (button, { inactiveButtonClass }) => {
-  button.classList.remove(inactiveButtonClass);
   button.classList.add(inactiveButtonClass);
   button.setAttribute('disabled', true);
 };
