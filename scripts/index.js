@@ -54,11 +54,13 @@ const openPopupScaleImg = function (element) {
   scalingTitleGalery.textContent = element.name;
   scalingAltImgGalery.alt = 'Увеличенное изображение ' + element.name;
   popupScaleImg.classList.add('popup_open');
+  document.addEventListener('keydown', popupCloseByPressEsc);
 };
 
 //фунция закрытия по клику на close и вне модалки
 const closePopup = function (popup) {
   popup.classList.remove('popup_open');
+  document.removeEventListener('keydown', popupCloseByPressEsc);
 };
 
 //находим модалки и навешиваем функцию закрытия при клике вне

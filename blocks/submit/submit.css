@@ -16,6 +16,10 @@
   opacity: 0.8;
 }
 
+.submit:hover:disabled {
+  cursor: auto;
+}
+
 @media (max-width: 768px) {
   .submit{
     width: 238px;
