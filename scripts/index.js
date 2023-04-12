@@ -9,14 +9,15 @@ const popupOpenButtonAddElement = document.querySelector('.profile__add-item-but
 const popupOpenScaleImg = document.querySelector('.galery__img');
 
 //кнопки закрытия модалок
-const popupCloseButtonElement = popupEditProfile.querySelector('.popup__close');
+const popupCloseButtonEditProfile = popupEditProfile.querySelector('.popup__close');
 const popupCloseButtonAddElement = popupAddElement.querySelector('.popup__close');
 const popupCloseScaleImg = popupScaleImg.querySelector('.popup__close');
 
 //поля формы в модалке редактирования профиля
-const formEditProfile = popupEditProfile.querySelector('.form');
+const formEditProfile = popupEditProfile.querySelector('.form_edit-profile');
 const fieldName = formEditProfile.querySelector('.form__field_input_name');
 const fieldJob = formEditProfile.querySelector('.form__field_input_job');
+const editProfileInputs = popupEditProfile.querySelectorAll('.form__field');
 
 //элементы профиля на странице
 const nameDefault = document.getElementById('name');
@@ -30,23 +31,28 @@ const galeryItems = document.querySelector('.galery');
 const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
 const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
 const formAddItemGalary = popupAddElement.querySelector('.form-add-item-galery');
-
-//функция открытия модалок
-const openPopup = function (popup) {
-  popup.classList.add('popup_open');
-};
+const addItemGaleryInputs = popupAddElement.querySelectorAll('.form__field');
 
 //увеличенное изображение
 const scalingImgGalery = popupScaleImg.querySelector('.popup__scale-img');
 const scalingTitleGalery = popupScaleImg.querySelector('.popup__title-img');
 const scalingAltImgGalery = popupScaleImg.querySelector('.popup__scale-img');
 
+//кнопки субмитов модалок
+const formAddElementButton = popupAddElement.querySelector('.submit');
+const formEditButton = popupEditProfile.querySelector('.submit');
+
+//функция открытия модалок
+const openPopup = function (popup) {
+  popup.classList.add('popup_open');
+  document.addEventListener('keydown', popupCloseByPressEsc);
+};
+
 //функция открытия увеличенного изображения элемента
 const openPopupScaleImg = function (element) {
   scalingImgGalery.src = element.link;
   scalingTitleGalery.textContent = element.name;
   scalingAltImgGalery.alt = 'Увеличенное изображение ' + element.name;
-
   popupScaleImg.classList.add('popup_open');
 };
 
@@ -64,7 +70,15 @@ popupList.forEach(popup => {
     }
      closePopup(popup)
   })
-})
+});
+
+// закрытие модалки на esc
+const popupCloseByPressEsc = (event) => {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_open');
+    closePopup(openedPopup);
+  };
+};
 
 // Обработчик «отправки» формы
 function submitFormEditProfile(event) {
@@ -133,29 +147,52 @@ function handleEmotionGaleryItem (event) {
 //обработчики отправки формы(по клику на submit)
 formEditProfile.addEventListener('submit', submitFormEditProfile);
 formAddItemGalary.addEventListener('submit', addGaleryItem);
-
 //клики модалки редактирования профиля
+//открываем
 popupOpenButtonEditProfile.addEventListener("click", function () {
-//записываем значения полей на страницы в поля формы    
+//включаем кнопку при открытии, потому что поля всегда заполнены валидно 
+  enableButton(formEditButton, { inactiveButtonClass: validation.inactiveButtonClass, activeButtonClass: validation.inactiveButtonClass });
+//удаляем ошибки валидации
+  clearErrorsFormFields(editProfileInputs, validation.errorClass, validation.inputErrorClass);
+//записываем значения полей на страницы в поля формы
   fieldName.value = nameDefault.textContent;
   fieldJob.value = jobDefault.textContent;
   openPopup(popupEditProfile);
 });
-popupCloseButtonElement.addEventListener("click", function () {
-  closePopup(popupEditProfile);
-});
+
+// закрываем на клоус
+popupCloseButtonEditProfile.addEventListener("click", () => closePopup(popupEditProfile));
 
 //клики модалки добавления элемента в галерею
+// открываем
 popupOpenButtonAddElement.addEventListener("click", function () {
 //очищаем поля формы
   formAddItemGalary.reset();
+  //удаляем ошибки валидации
+  clearErrorsFormFields(addItemGaleryInputs, validation.errorClass, validation.inputErrorClass);
   openPopup(popupAddElement);
+  // отключаем кнопку при каждом открытии
+  disableButton(formAddElementButton, { inactiveButtonClass: validation.inactiveButtonClass, activeButtonClass: validation.inactiveButtonClass });
 });
-popupCloseButtonAddElement.addEventListener("click", function () {
-  closePopup(popupAddElement);
+
+// закрываем на клоус
+popupCloseButtonAddElement.addEventListener("click", function () { 
+  closePopup(popupAddElement)
 });
 
 //клики модалки увеличенного изображения элемента галерии
-popupCloseScaleImg.addEventListener("click", function () {
-  closePopup(popupScaleImg);
-});
+popupCloseScaleImg.addEventListener("click", () => closePopup(popupScaleImg));
+
+//Валидация форм
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+const validation = ({
+  formSelector: '.form',
+  inputSelector: '.form__field',
+  submitButtonSelector: '.submit',
+  inactiveButtonClass: 'submit_disabled',
+  inputErrorClass: 'form__field_error',
+  errorClass: 'form__error'
+}); 
+
+enableValidation(validation);

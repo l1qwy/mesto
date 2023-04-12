@@ -29,10 +29,12 @@
   <section class="popup popup_edit-profile">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="close-popup"></button>
-      <form class="form form_edit-profile" name="form_edit-profile">
+      <form class="form form_edit-profile" name="form_edit-profile" novalidate>
         <h3 class="form__title">Редактировать профиль</h3>
-          <input class="form__field form__field_input_name" type="text" name="input-name" placeholder="Имя" required>
-          <input class="form__field form__field_input_job" type="text" name="input-job" placeholder="Деятельность" required>
+          <input class="form__field form__field_input_name" id="name-pfofile" type="text" name="input-name" placeholder="Имя" minlength="2" maxlength="40" required>
+          <div class="form__field_error-container"><span class="form__field_error" id="name-pfofile-error"></span></div>
+          <input class="form__field form__field_input_job" id="job-profile" type="text" name="input-job" placeholder="Деятельность" minlength="2" maxlength="200" required>
+          <div class="form__field_error-container"><span class="form__field_error" id="job-profile-error"></span></div>
           <button class="submit" type="submit" aria-label="save-form">Сохранить</button>
       </form>
     </div>
@@ -40,11 +42,13 @@
   <section class="popup popup_add-item">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="close-popup"></button>
-      <form class="form form-add-item-galery" name="form-add-item-galery">
+      <form class="form form-add-item-galery" name="form-add-item-galery" novalidate>
         <h3 class="form__title">Новое место</h3>
-          <input class="form__field form__field_input_name form__field_input_title" type="text" name="input-name-img" placeholder="Название" required>
-          <input class="form__field form__field_input_job form__field_input_url" type="text" name="input-url" placeholder="Ссылка на картинку" required>
-          <button class="submit submit_create" type="submit" aria-label="add-item-galery">Создать</button>
+          <input class="form__field form__field_input_name form__field_input_title" id="name-img" type="text" name="input-name-img" placeholder="Название" minlength="2" maxlength="30" required>
+          <div class="form__field_error-container"><span class="form__field_error" id="name-img-error"></span></div>
+          <input class="form__field form__field_input_job form__field_input_url" id="url-img" type="url" name="input-url" placeholder="Ссылка на картинку" required>
+          <div class="form__field_error-container"><span class="form__field_error" id="url-img-error"></span></div>
+          <button class="submit" type="submit" aria-label="add-item-galery">Создать</button>
       </form>
     </div>
   </section>
@@ -65,6 +69,7 @@
       <button class="galery__delete" type="button" aria-label="delete-galery-item"></button>
     </article>
   </template> 
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>

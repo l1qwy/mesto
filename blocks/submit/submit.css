@@ -1,15 +1,15 @@
 .submit {
   width: 358px;
-    height: 50px;
-    background-color: black;
-    border-radius: 2px;
-    margin: 48px 0 0;
-    border-style: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: "Inter", Arial, sans-serif;
-    color: white;
-    font-size: 18px;
+  height: 50px;
+  background-color: black;
+  border-radius: 2px;
+  margin: 16px 0 0;
+  border-style: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: "Inter", Arial, sans-serif;
+  color: white;
+  font-size: 18px;
 }
 
 .submit:hover {
