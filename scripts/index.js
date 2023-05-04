@@ -1,68 +1,47 @@
+import FormValidator from './FormValidator.js';
+import Card from './card.js';
+import initialCards from './constants.js';
+
 //модальные окна
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddElement = document.querySelector('.popup_add-item');
 const popupScaleImg = document.querySelector('.popup_scale-img');
-
 //кнопки открытия модалок
 const popupOpenButtonEditProfile = document.querySelector('.profile__edit-button');
 const popupOpenButtonAddElement = document.querySelector('.profile__add-item-button');
-const popupOpenScaleImg = document.querySelector('.galery__img');
-
 //кнопки закрытия модалок
 const popupCloseButtonEditProfile = popupEditProfile.querySelector('.popup__close');
 const popupCloseButtonAddElement = popupAddElement.querySelector('.popup__close');
 const popupCloseScaleImg = popupScaleImg.querySelector('.popup__close');
-
 //поля формы в модалке редактирования профиля
 const formEditProfile = popupEditProfile.querySelector('.form_edit-profile');
 const fieldName = formEditProfile.querySelector('.form__field_input_name');
 const fieldJob = formEditProfile.querySelector('.form__field_input_job');
-const editProfileInputs = popupEditProfile.querySelectorAll('.form__field');
-
+//кнопка сохранить модалки редактирования профиля(для изменения состояния кнопки при открытии модалки)
+const saveButtonProfile = formEditProfile.querySelector('.submit')
 //элементы профиля на странице
 const nameDefault = document.getElementById('name');
 const jobDefault = document.getElementById('job');
-
-//темплейт контент
-const galeryTemplate = document.querySelector('#galery-item').content;
+//темплейт контент элемента галерии
+const cardTemplate = '#galery-item';
 const galeryItems = document.querySelector('.galery');
-
-//поля формы модалки добавления нового элемента в галерею
+//поля форма модалки добавления нового элемента в галерею и ее поля
+const formAddItemGalary = popupAddElement.querySelector('.form-add-item-galery');
 const galeryItemTitle = popupAddElement.querySelector('.form__field_input_title');
 const galeryItemLink = popupAddElement.querySelector('.form__field_input_url');
-const formAddItemGalary = popupAddElement.querySelector('.form-add-item-galery');
-const addItemGaleryInputs = popupAddElement.querySelectorAll('.form__field');
-
-//увеличенное изображение
+//модалка увеличенного изображения
 const scalingImgGalery = popupScaleImg.querySelector('.popup__scale-img');
 const scalingTitleGalery = popupScaleImg.querySelector('.popup__title-img');
-const scalingAltImgGalery = popupScaleImg.querySelector('.popup__scale-img');
-
-//кнопки субмитов модалок
-const formAddElementButton = popupAddElement.querySelector('.submit');
-const formEditButton = popupEditProfile.querySelector('.submit');
-
 //функция открытия модалок
 const openPopup = function (popup) {
   popup.classList.add('popup_open');
   document.addEventListener('keydown', popupCloseByPressEsc);
 };
-
-//функция открытия увеличенного изображения элемента
-const openPopupScaleImg = function (element) {
-  scalingImgGalery.src = element.link;
-  scalingTitleGalery.textContent = element.name;
-  scalingAltImgGalery.alt = 'Увеличенное изображение ' + element.name;
-  popupScaleImg.classList.add('popup_open');
-  document.addEventListener('keydown', popupCloseByPressEsc);
-};
-
-//фунция закрытия по клику на close и вне модалки
+//фунция закрытия по клику на close и удаление слушателя преса ЭСК
 const closePopup = function (popup) {
   popup.classList.remove('popup_open');
   document.removeEventListener('keydown', popupCloseByPressEsc);
 };
-
 //находим модалки и навешиваем функцию закрытия при клике вне
 const popupList = document.querySelectorAll('.popup');
 popupList.forEach(popup => {
@@ -73,7 +52,6 @@ popupList.forEach(popup => {
      closePopup(popup)
   })
 });
-
 // закрытие модалки на esc
 const popupCloseByPressEsc = (event) => {
   if (event.key === 'Escape') {
@@ -81,8 +59,24 @@ const popupCloseByPressEsc = (event) => {
     closePopup(openedPopup);
   };
 };
-
-// Обработчик «отправки» формы
+// функция открытия увеличенного изображения элемента
+function openPopupScaleImg (initialCards) {
+  scalingImgGalery.src = initialCards.link;
+  scalingTitleGalery.textContent = initialCards.name;
+  scalingImgGalery.alt = 'Увеличенное изображение ' + initialCards.name;
+  openPopup(popupScaleImg)
+};
+//создаем экземпляр класса элемента галерии(карточки)
+function createCardGalery (element) {
+  const card = new Card(element, cardTemplate, openPopupScaleImg);
+  const cardItem = card.generateCard();
+  return cardItem;
+}
+//наполняем страницу карточками
+initialCards.forEach((element) => {
+  galeryItems.append(createCardGalery(element))
+})
+// прерываем отправку форми при сабмите, вписываем значения из инпутов модалки редактирования профиля на страницу
 function submitFormEditProfile(event) {
     event.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     // Получите значение полей jobInput и nameInput из свойства value
@@ -93,108 +87,59 @@ function submitFormEditProfile(event) {
     jobDefault.textContent = jobValue;
     closePopup(popupEditProfile);
   };
-
-//создаем контент с данными из массива
-function createGaleryItem(element) {
-  const galeryElement = galeryTemplate.cloneNode(true);
-  //берем данные из массива
-  const imgElementGalery = galeryElement.querySelector('.galery__img');
-  const titleElementGalery = galeryElement.querySelector('.galery__item-title');
-  const altImgElementGalery = galeryElement.querySelector('.galery__img');
-
-  imgElementGalery.src = element.link;
-  titleElementGalery.textContent = element.name;
-  altImgElementGalery.alt = 'Изображение: ' + element.name;
-  
-  // слушатели удаления и лайка
-  galeryElement.querySelector('.galery__delete').addEventListener('click', handleDeleteGaleryItem);
-  galeryElement.querySelector('.galery__item-emotion').addEventListener('click', handleEmotionGaleryItem);
-  // слушатель открытия изображения
-  galeryElement.querySelector('.galery__img').addEventListener("click", () => openPopupScaleImg(element));
-  return galeryElement;
-}
-
-//дабавляем карточки из массива на страницу
-initialCards.forEach(element => {
-  const renderGaleryItem = createGaleryItem(element);
-  galeryItems.append(renderGaleryItem);
-});
-
 //добавление карточки на страницу через кнопку добавить
 function addGaleryItem (event) {
   event.preventDefault();
-  //берем значиения инпутов из модалки добавления элемента в галерею
-  const addItem = createGaleryItem({
+//прерываем отправку форми при сабмите, добавляем карточку в галерею со значениями инпутов модалки добавления
+  const addItem = {
     name: galeryItemTitle.value,
     link: galeryItemLink.value,
     alt: galeryItemTitle.value
-  });
-  galeryItems.prepend(addItem);
+  };
+  galeryItems.prepend(createCardGalery(addItem));
   event.target.reset();
   closePopup(popupAddElement);
 };
 
-//фунция удаления элемента галерии
-function handleDeleteGaleryItem (event) {
-  const deleteGaleryItem = event.target.closest('.galery__item');
-  deleteGaleryItem.remove();
-};
-
-//фунция лайка
-function handleEmotionGaleryItem (event) {
-  event.target.classList.toggle('galery__item-emotion_active');
-};
-
-//обработчики кликов
-//обработчики отправки формы(по клику на submit)
+//обработчик клика кнопок сабмита модалок
 formEditProfile.addEventListener('submit', submitFormEditProfile);
 formAddItemGalary.addEventListener('submit', addGaleryItem);
-//клики модалки редактирования профиля
-//открываем
-popupOpenButtonEditProfile.addEventListener("click", function () {
-//включаем кнопку при открытии, потому что поля всегда заполнены валидно 
-  enableButton(formEditButton, { inactiveButtonClass: validation.inactiveButtonClass, activeButtonClass: validation.inactiveButtonClass });
-//удаляем ошибки валидации
-  clearErrorsFormFields(editProfileInputs, validation.errorClass, validation.inputErrorClass);
-//записываем значения полей на страницы в поля формы
-  fieldName.value = nameDefault.textContent;
-  fieldJob.value = jobDefault.textContent;
-  openPopup(popupEditProfile);
-});
-
-// закрываем на клоус
+//обработчик закрытия пр клике на клос
 popupCloseButtonEditProfile.addEventListener("click", () => closePopup(popupEditProfile));
-
-//клики модалки добавления элемента в галерею
-// открываем
-popupOpenButtonAddElement.addEventListener("click", function () {
-//очищаем поля формы
-  formAddItemGalary.reset();
-  //удаляем ошибки валидации
-  clearErrorsFormFields(addItemGaleryInputs, validation.errorClass, validation.inputErrorClass);
-  openPopup(popupAddElement);
-  // отключаем кнопку при каждом открытии
-  disableButton(formAddElementButton, { inactiveButtonClass: validation.inactiveButtonClass, activeButtonClass: validation.inactiveButtonClass });
-});
-
-// закрываем на клоус
-popupCloseButtonAddElement.addEventListener("click", function () { 
-  closePopup(popupAddElement)
-});
-
-//клики модалки увеличенного изображения элемента галерии
+popupCloseButtonAddElement.addEventListener("click", () => closePopup(popupAddElement));
 popupCloseScaleImg.addEventListener("click", () => closePopup(popupScaleImg));
-
 //Валидация форм
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
 const validation = ({
-  formSelector: '.form',
   inputSelector: '.form__field',
   submitButtonSelector: '.submit',
   inactiveButtonClass: 'submit_disabled',
   inputErrorClass: 'form__field_error',
   errorClass: 'form__error'
 }); 
-
-enableValidation(validation);
+//создаем экземпляры валидатора для форм реклатирования профиля и добавления карточки
+const formEditInstance = new FormValidator (formEditProfile, validation);
+formEditInstance.enableValidation();
+const formAddInstance = new FormValidator (formAddItemGalary, validation);
+formAddInstance.enableValidation();
+//обработчик открытия модалки редктирования профиля
+popupOpenButtonEditProfile.addEventListener("click", function () {
+//удаляем ошибки валидации
+formEditInstance.clearErrorsFormFields();
+//записываем значения полей на страницы в поля формы
+  fieldName.value = nameDefault.textContent;
+  fieldJob.value = jobDefault.textContent;
+//делаем кнопку сохранить активной, так как поля заполнены при открытии
+  saveButtonProfile.removeAttribute('disabled');
+  saveButtonProfile.classList.remove('submit_disabled');
+  openPopup(popupEditProfile);
+});
+//обработчик открытия модалки добавления карточки
+popupOpenButtonAddElement.addEventListener("click", function () {
+//очищаем поля формы
+  formAddItemGalary.reset();
+  //удаляем ошибки валидации
+  formAddInstance.clearErrorsFormFields();
+  openPopup(popupAddElement);
+});
