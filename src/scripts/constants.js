@@ -26,4 +26,13 @@ const initialCards = [
   }
 ]; 
 
-export default initialCards;
+// Валидация форм
+const validation = ({
+  inputSelector: '.form__field',
+  submitButtonSelector: '.submit',
+  inactiveButtonClass: 'submit_disabled',
+  inputErrorClass: 'form__field_error',
+  errorClass: 'form__error'
+}); 
+
+export { initialCards, validation};

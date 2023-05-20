@@ -1,10 +1,8 @@
-//создаем класс и проводим экспорт, прописываем в конструктор массив даннвх карточек, селектор шаблона карточки, ссылку на функцию открытия модалки увеличенного изображения
+//создаем класс и проводим экспорт, прописываем в конструктор массив данных карточек, селектор шаблона карточки, ссылку на функцию открытия модалки увеличенного изображения
 //прописываем свойства
 export default class Card {
-  constructor (initialCards, cardTemplate, openPopupScaleImg) {
-    this._initialCards = initialCards;
-    this._name = initialCards.name;
-    this._link = initialCards.link;
+  constructor (obj, cardTemplate, openPopupScaleImg) {
+    this._obj = obj;
     this._cardTemplate = cardTemplate;
     this._openPopupScaleImg = openPopupScaleImg;
   }
@@ -17,13 +15,11 @@ export default class Card {
   generateCard() {
     this._templateElement = this._getTemplate();
     this._cardImg = this._templateElement.querySelector('.galery__img');
-    this._cardTitle = this._templateElement.querySelector('.galery__item-title')
-    this._cardTitle.textContent = this._name;
-    this._cardImg.alt = 'Изображение: ' + this._name;
-    this._cardImg.src = this._link;
+    this._templateElement.querySelector('.galery__item-title').textContent = this._obj.name;
+    this._cardImg.alt = 'Изображение: ' + this._obj.name;
+    this._cardImg.src = this._obj.link;
     this._likeButton = this._templateElement.querySelector('.galery__item-emotion');
     this._deleteCard = this._templateElement.querySelector('.galery__delete');
-    this._scaleImg = this._templateElement.querySelector('.galery__img');
     this._setEventListeners();
 
     return this._templateElement;
@@ -44,6 +40,6 @@ export default class Card {
   }
 
   _scaleGaleryImg = () => {
-    this._openPopupScaleImg(this._initialCards);
+    this._openPopupScaleImg(this._obj);
   }
 };
