@@ -72,6 +72,6 @@ export default class FormValidator {
         this._hideFieldError(input);
       }
     })
-      this._disableButton();
+        this._disableButton()
   }
 };

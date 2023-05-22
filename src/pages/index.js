@@ -1,12 +1,11 @@
-import './pages/index.css';
-import FormValidator from './scripts/formValidator.js';
-import Card from './scripts/card.js';
-import { initialCards, validation } from './scripts/constants.js';
-import Section from './scripts/section.js';
-import PopupWithImage from './scripts/popupWithImage.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import UserInfo from './scripts/userInfo.js';
-
+import '../pages/index.css';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Card from '../scripts/components/Сard.js';
+import { initialCards, validation } from '../scripts/constants.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import UserInfo from '../scripts/components/UserInfo.js';
 // модальные окна
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddElement = document.querySelector('.popup_add-item');
@@ -66,8 +65,9 @@ function openPopupScaleImg (initialCards) {
 // обработчик открытия модалки редктирования профиля
 popupOpenButtonEditProfile.addEventListener("click", function () {
   formEditInstance.clearErrorsFormFields();
-  formEditProfile.querySelector('.form__field_input_name').value = userInfoInstance.getUserInfo().nameProfile;
-  formEditProfile.querySelector('.form__field_input_job').value = userInfoInstance.getUserInfo().jobProfile;
+  const profileInfo = userInfoInstance.getUserInfo()
+  formEditProfile.nameProfile.value = profileInfo.nameProfile;
+  formEditProfile.jobProfile.value = profileInfo.jobProfile;
   popupEditInstance.open();
 });
 // обработчик открытия модалки добавления карточки
