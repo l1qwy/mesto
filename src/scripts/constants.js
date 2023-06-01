@@ -1,31 +1,3 @@
-// массив элементов
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
 // Валидация форм
 const validation = ({
   inputSelector: '.form__field',
@@ -35,4 +7,27 @@ const validation = ({
   errorClass: 'form__error'
 }); 
 
-export { initialCards, validation};
+const popupEditProfileSelector = '.popup_edit-profile';
+const popupAddElementSelector = '.popup_add-item';
+const popupScaleImgSelector = '.popup_scale-img';
+const popupChangeAvatarSelector = '.popup_avatar-profle';
+const popupDeleteCardSelector = '.popup_delete-item';
+
+const userProfileInfo = {
+  userName: '.profile__name',
+  userJob: '.profile__description',
+  userAvatar: '.profile__avatar'
+}
+// темплейт контент элемента галерии и селектор контейна карточек
+const cardTemplate = '#galery-item';
+const galeryContainer = '.galery';
+
+export {validation,
+  popupEditProfileSelector,
+  popupAddElementSelector,
+  popupScaleImgSelector,
+  popupChangeAvatarSelector,
+  popupDeleteCardSelector,
+  userProfileInfo,
+  cardTemplate,
+  galeryContainer};

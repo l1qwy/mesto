@@ -39,6 +39,7 @@ export default class FormValidator {
   };
 //проверка валидности
   _hasInvalidInput () {
+    // console.log(this._formInputs)
     return Array.from(this._formInputs).some(item => !item.validity.valid);
   };
 //активация кнопки сохранения
@@ -72,6 +73,7 @@ export default class FormValidator {
         this._hideFieldError(input);
       }
     })
-        this._disableButton()
+      this._disableButton()
+      this._form.reset();
   }
 };

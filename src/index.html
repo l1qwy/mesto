@@ -11,10 +11,12 @@
   </header>
   <main>
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Здесь должно быть изображение Вашего профиля">
+      <button class="profile__avatar-button" type="button" aria-label="change-avatar">
+        <img class="profile__avatar" src="#" alt="Здесь должно быть изображение Вашего профиля" name="avatarProfile">
+      </button>
       <div class="profile__info">
-        <h1 class="profile__name" id="name">Жак-Ив Кусто</h1>
-        <p class="profile__description" id="job">Исследователь океана</p>
+        <h1 class="profile__name" id="name"></h1>
+        <p class="profile__description" id="job"></p>
       </div>
       <button class="profile__edit-button" type="button" aria-label="edit-profile-button"></button>
       <button class="profile__add-item-button" type="button" aria-label="add-item-galery"></button>
@@ -41,13 +43,33 @@
   <section class="popup popup_add-item">
     <div class="popup__container">
       <button class="popup__close" type="button" aria-label="close-popup"></button>
-      <form class="form form-add-item-galery" name="form-add-item-galery" novalidate>
+      <form class="form form_add-item-galery" name="form-add-item-galery" novalidate>
         <h3 class="form__title">Новое место</h3>
           <input class="form__field form__field_input_name form__field_input_title" id="name-img" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required>
           <div class="form__error-container"><span id="name-img-error"></span></div>
           <input class="form__field form__field_input_job form__field_input_url" id="url-img" type="url" name="link" placeholder="Ссылка на картинку" required>
           <div class="form__error-container"><span id="url-img-error"></span></div>
           <button class="submit" type="submit" aria-label="add-item-galery">Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_avatar-profle">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="close-popup"></button>
+      <form class="form form_change-avatar" name="form-change-avatar" novalidate>
+        <h3 class="form__title">Обновить аватар</h3>
+          <input class="form__field form__field_change_avatar" id="url-avatar" type="url" name="avatarProfile" placeholder="Ссылка на аватар" required>
+          <div class="form__error-container"><span id="url-avatar-error"></span></div>
+          <button class="submit" type="submit" aria-label="change-avatar">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_delete-item">
+    <div class="popup__container popup__container_delete">
+      <button class="popup__close" type="button" aria-label="close-popup"></button>
+      <form class="form form_delete-item" name="form_delete-item" novalidate>
+        <h3 class="form__title form__title_delete">Вы уверены?</h3>
+          <button class="submit submit_delete" type="submit" aria-label="delete-item-galery">Да</button>
       </form>
     </div>
   </section>
@@ -63,9 +85,13 @@
       <img class="galery__img">
       <div class="galery__item-description">
         <h2 class="galery__item-title"></h2>
+      <div>
         <button class="galery__item-emotion" type="button" aria-label="galery-emotion"></button>
+        <span class="galery__counter">0</span>
+      </div> 
       </div>
-      <button class="galery__delete" type="button" aria-label="delete-galery-item"></button>
+      <button class="galery__delete" type="button" aria-label="delete-galery-item">
+      </button>
     </article>
   </template> 
 </body>
