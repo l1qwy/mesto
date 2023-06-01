@@ -1,6 +1,6 @@
 import '../pages/index.css';
-import FormValidator from '../scripts/components/FormValidator.js';
-import Card from '../scripts/components/Сard.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Сard.js';
 import {validation,
   popupEditProfileSelector,
   popupAddElementSelector,
@@ -9,13 +9,13 @@ import {validation,
   popupDeleteCardSelector,
   userProfileInfo,
   cardTemplate,
-  galeryContainer} from '../scripts/constants.js';
-import Section from '../scripts/components/Section.js';
-import PopupWithImage from '../scripts/components/PopupWithImage.js';
-import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import UserInfo from '../scripts/components/UserInfo.js';
-import PopupDeleteCard from '../scripts/components/PopupDeleteCard.js';
-import Api from '../scripts/components/Api.js';
+  galeryContainer} from '../utils/constants.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupDeleteCard from '../components/PopupDeleteCard.js';
+import Api from '../components/Api.js';
 
 //экземпляр класса запросов на сервер
 const api = new Api ({

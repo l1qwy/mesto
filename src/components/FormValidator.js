@@ -74,6 +74,5 @@ export default class FormValidator {
       }
     })
       this._disableButton()
-      this._form.reset();
   }
 };
